@@ -29,10 +29,6 @@ ourRequest.send();
 
 function renderHTML(data) {
 
-  json.sort(function(a, b){
-    return a.id - b.id;
-});
-
   userContainer.innerHTML = ""
   var htmlString = "";
 
@@ -128,7 +124,7 @@ htmlString += "<div class='col-md-6'><div id='" + data[i].id + "' class='user-ca
               
               
     } else {
-      console.log("Not in that city");
+      
     };
               
               }
@@ -226,7 +222,7 @@ var iii = 0;
 function cardFunction(e) {
   
   if (e.target !== e.currentTarget && iii == 0 && e.target.id !== "") {
-    if (e.target.id == "back-btn") {} else {
+    if (e.target.id == "back-btn") { } else {
   iii++;
   var clickedCard = e.target.id;
   var specUser = "http://challenge-dev.starmarkcloud.com/users/" + clickedCard;         // HOW DOES THIS NOT WORK!!!!!!!!!!!!!!!!!!!!!!!!
@@ -244,10 +240,11 @@ function cardFunction(e) {
   
   ourRequest.onerror = function() {
     console.log("Connection error");
+
+
   };
 
-specRequest.send();
-
+if (e.target.id !== "back-btn") { specRequest.send(); } else {}
 
     };
   }
@@ -262,7 +259,7 @@ userContainer.addEventListener("click", cardFunction);
 
 var refresher = function() {
   var ourData = JSON.parse(ourRequest.responseText);
-  iii--;
+  iii = 0;
   renderHTML(ourData);
 }
 
